@@ -345,8 +345,8 @@ img {
 .styled-form {
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
+    gap: 2px;
+    max-width: 600px;
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
@@ -356,14 +356,15 @@ img {
 
 .styled-form label {
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-top: 8px;
+    margin-bottom: 0px;
 }
 
-.styled-form input[type="email"] {
-    padding: 10px;
+.styled-form input,
+.styled-form textarea {
+    padding: 8px; /* Adjust padding for inputs and textarea */
     border: 1px solid #ccc;
     border-radius: 5px;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -377,6 +378,17 @@ img {
     text-align: center;
 }
 
-.styled-form .btn-primary:hover {
-    background-color: var(--accent-color-dark);
+#anlass {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#anlass input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.inline-label {
+    display: inline;
+    margin-right: 10px;
 }
