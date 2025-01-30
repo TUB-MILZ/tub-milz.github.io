@@ -16,7 +16,54 @@ banner-subtitle: Wie und wo wird der Datensatz veröffentlicht?
 <section id="notification-of-publishing">
     <h2>Benachritigung zur Veröffentlichung vom Datensatz</h2>
     <p>Wenn Sie benachrichtigt werden möchten, sobald der Datensatz veröffentlicht wurde, können Sie uns Ihre E-Mail-Adresse hinterlassen. Wir werden Sie informieren, sobald der Datensatz auf Zenodo veröffentlicht wurde.</p>
-    <div class="link-container">
-        <a href="https://forms.gle/EPF5L3MuEtTvr1vSA" class="btn-primary" target="_blank">Benachrichtigung zur Veröffentlichung</a>
+    
+
+    <form id="veroeffentlichung-form" action="https://formspree.io/f/xjkgrvje" method="POST" class="styled-form">
+        <label for="vorname">Vorname:</label>
+        <input type="text" id="vorname" name="vorname">
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="email">Ihre E-Mail:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit" class="btn-primary">Senden</button>
+    </form>
+
+    <div id="thank-you-message-div" style="display:none;">
+        <h5 id="thank-you-message-text">Vielen Dank, Sie werden informiert sobald den Datensatz veröffentlicht wird.</h5>
     </div>
+    <script>
+        document.getElementById("veroeffentlichung-form").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
+        
+            let form = event.target;
+            let formData = new FormData(form);
+        
+            let response = await fetch("https://formspree.io/f/xjkgrvje", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+        
+            let responseMessageDiv = document.getElementById("thank-you-message-div");
+            let responseMessageText = document.getElementById("thank-you-message-text");
+
+            console.log(response);
+        
+            if (response.ok) {
+                responseMessageText.textContent = "Vielen Dank, Sie werden informiert sobald den Datensatz veröffentlicht wird.";
+                form.reset(); // Clear form fields
+                form.style.display = "none"; // Hide the form
+                responseMessageText.style.color = "black";
+            } else {
+                responseMessageText.textContent = "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut und vergewissern Sie sich, dass alle Felder korrekt ausgefüllt sind.";
+                responseMessageText.style.color = "red";
+            }
+        
+            responseMessageDiv.style.display = "block"; // Show message
+        });
+    </script>
+
 </section>
