@@ -340,3 +340,43 @@ img {
 .bio{
     padding-top: 0px;
 }
+
+/* FORMS */
+.styled-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.styled-form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.styled-form input[type="email"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.styled-form .btn-primary {
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.styled-form .btn-primary:hover {
+    background-color: var(--accent-color-dark);
+}
