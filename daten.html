@@ -5,41 +5,80 @@ banner-title: Daten
 banner-subtitle: Kontaktmöglichkeiten zu den Organisatoren
 ---
 
-<section id="introduction">
-    <p>Wir bieten denjenigen, die im Datensatz erscheinen, die Möglichkeit, die Daten einzusehen, in denen sie abgebildet sind. Zudem haben Sie die Möglichkeit, der Verwendung ihres Bildes im Datensatz zu widersprechen. Darüber hinaus stehen wir für weitere Fragen bezüglich des Datensatzes und seiner Verwendung gerne zur Verfügung.</p>
-</section>
+
+<section id="contact-section">
+    <h2>Kontaktformular</h2>
+    <p>Sie haben die Möglichkeit, die Daten einzusehen, die während Ihrer Begegnung mit dem Aufnahmefahrzeug generiert wurden, und innerhalb von vier Wochen nach der Aufnahme Widerspruch gegen die Verwendung Ihrer Daten einzulegen. Wir können die Daten auch nach der Veröffentlichung noch bereinigen, jedoch nicht in den Downloads, die bis dahin bereits erfolgt sind. Darüber hinaus stehen wir für weitere Fragen oder Kommentare gerne zur Verfügung.</p>
+
+    <h5 id="form-title">Dazu füllen Sie das folgende Formular aus:</h5>
+
+    <form id="contact-form" action="https://formspree.io/f/mdkazogy" method="POST" class="styled-form">
+        <label for="vorname">Vorname:</label>
+        <input type="text" id="vorname" name="vorname" required>
+        
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Ihre E-Mail:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="phone">Telefonnummer:</label>
+        <input type="tel" id="phone" name="phone">
+        
+        <label for="anlass">Anlass:</label>
+        <div id="anlass">
+            <input type="checkbox" id="einsicht" name="anlass" value="einsicht">
+            <label for="einsicht" class="inline-label">Einsicht in die Daten</label>
+            <input type="checkbox" id="loeschung" name="anlass" value="loeschung">
+            <label for="loeschung" class="inline-label">Löschung von Daten</label>
+        </div>
+        
+        <label for="datetime">Zeit Ihrer Begegnung mit dem Aufnahmefahrzeug:</label>
+        <input type="datetime-local" id="datetime" name="datetime">
+    
 
 
-<!--section id="notification-of-publishing">
-    <h2>Benachritigung zur Veröffentlichung vom Datensatz</h2>
-    <p>Wenn Sie benachrichtigt werden möchten, sobald der Datensatz veröffentlicht wurde, können Sie uns Ihre E-Mail-Adresse hinterlassen. Wir werden Sie informieren, sobald der Datensatz auf Zenodo veröffentlicht wurde.</p>
-    <div class="link-container">
-        <a href="https://forms.gle/EPF5L3MuEtTvr1vSA" class="btn-primary" target="_blank">Benachrichtigung zur Veröffentlichung</a>
+        <label for="message">Kommentare, Fragen oder kurze Beschreibung Ihrer Person oder Fahrzeug:</label>
+        <textarea id="message" name="message"></textarea>
+        
+        <button type="submit" class="btn-primary">Senden</button>
+    </form>
+
+    <div id="thank-you-message-div" style="display:none;">
+        <h5 id="thank-you-message-text">Vielen Dank, wir werden Ihren Antrag bearbeiten.</h5>
     </div>
-</section-->
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
+        
+            let form = event.target;
+            let formData = new FormData(form);
+        
+            let response = await fetch("https://formspree.io/f/mdkazogy", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+        
+            let responseMessageDiv = document.getElementById("thank-you-message-div");
+            let responseMessageText = document.getElementById("thank-you-message-text");
+            let formTitle = document.getElementById("form-title");
 
-<section id="see-data">
-    <h2>Dateneinsicht</h2>
-    <p>Sie haben die Möglichkeit, die Daten einzusehen, die während Ihrer Begegnung mit dem Aufnahmefahrzeug generiert wurden.</p>
-    <div class="link-container">
-        <a href="https://forms.gle/3mpib9AA9ad8PHRq9" class="btn-primary" target="_blank">Dateneinsicht beantragen</a>
-    </div>
-</section>
-
-<section id="refuse">
-    <h2>Widerspruch zur Verwendung von Daten</h2>
-    <p>Sie haben die Möglichkeit, innerhalb von vier Wochen nach der Aufnahme, Widerspruch gegen die Verwendung Ihrer Daten einzulegen. Wir können die Daten auch nach der Veröffentlichung noch bereinigen, jedoch nicht in den Downloads, die bis dahin bereits erfolgt sind.</p>
-    <div class="link-container">
-        <a href="https://forms.gle/XsYjZ5pCwG36rwoq6" class="btn-primary" target="_blank">Widerspruch einlegen</a>
-    </div>
-</section>
-
-
-<section id="question">
-    <h2>Weitere Fragen zu den Daten</h2>
-    <p>Bei weiteren Fragen zu den Daten oder zur Verwendung der Daten können Sie uns gerne kontaktieren.</p>
-    <div class="link-container">
-        <a href="https://forms.gle/9jpenwot2AC3ZRqS7" class="btn-primary" target="_blank">Weitere Fragen</a>
-    </div>
+            console.log(response);
+        
+            if (response.ok) {
+                responseMessageText.textContent = "Vielen Dank, wir werden Ihren Antrag bearbeiten.";
+                form.reset(); // Clear form fields
+                formTitle.style.display = "none"; // Hide the form title
+                form.style.display = "none"; // Hide the form
+                responseMessageText.style.color = "black";
+            } else {
+                responseMessageText.textContent = "Etwas ist schief gelaufen. Bitte versuchen Sie es erneut und vergewissern Sie sich, dass alle Felder korrekt ausgefüllt sind.";
+                responseMessageText.style.color = "red";
+            }
+        
+            responseMessageDiv.style.display = "block"; // Show message
+        });
+    </script>
 </section>
 
