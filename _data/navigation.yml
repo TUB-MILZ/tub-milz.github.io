@@ -1,0 +1,35 @@
+    en:
+      - title: Home
+        url: ""
+      - title: Sensors
+        url: english/sensors
+      - title: Anonymization
+        url: english/anonymisation
+      - title: Publication
+        url: english/publication
+      - title: Data
+        url: english/data
+
+    hr:
+      - title: Naslovnica
+        url: ""
+      - title: Senzori
+        url: hrvatski/senzori
+      - title: Anonimizacija
+        url: hrvatski/anonimizacija
+      - title: Objavljivanje
+        url: hrvatski/objava
+      - title: Podaci
+        url: hrvatski/podaci
+
+    de:
+      - title: Startseite
+        url: ""
+      - title: Sensoren
+        url: sensoren
+      - title: Anonymisierung
+        url: anonymisierung
+      - title: Veröffentlichung
+        url: veroeffentlichung
+      - title: Daten
+        url: daten
