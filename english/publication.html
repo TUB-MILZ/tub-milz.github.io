@@ -1,0 +1,65 @@
+---
+layout: default
+title: Publication
+banner-title: Publication
+banner-subtitle: How and where will the dataset be published?
+---
+
+<section id="introduction">
+    <p>The dataset will be published on European servers via <a href="https://zenodo.org/" target="_blank">Zenodo</a>. This ensures that the data are stored securely and remain accessible, while also complying with European data protection standards. Zenodo is a reliable platform supported by the European Commission and specifically designed for the storage and dissemination of scientific data.</p>
+
+    <p>The dataset will be released under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT License</a>, one of the most permissive open-source licenses. This license allows anyone to use, copy, modify, and redistribute the dataset, provided that the original authors are credited. By publishing the dataset under the MIT License, we promote open use and further development of the data, fostering research and innovation in the field of autonomous driving worldwide.</p>
+</section>
+
+<section id="notification-of-publishing">
+    <h2>Dataset Publication Notification</h2>
+    <p>If you would like to be notified when the dataset is published, you can leave us your email address. We will inform you as soon as the dataset becomes available on Zenodo.</p>
+    
+    <form id="veroeffentlichung-form" action="https://formspree.io/f/xjkgrvje" method="POST" class="styled-form">
+        <label for="vorname">First Name:</label>
+        <input type="text" id="vorname" name="vorname">
+        
+        <label for="name">Last Name:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit" class="btn-primary">Send</button>
+    </form>
+
+    <div id="thank-you-message-div" style="display:none;">
+        <h5 id="thank-you-message-text">Thank you! You will be notified as soon as the dataset is published.</h5>
+    </div>
+    <script>
+        document.getElementById("veroeffentlichung-form").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
+        
+            let form = event.target;
+            let formData = new FormData(form);
+        
+            let response = await fetch("https://formspree.io/f/xjkgrvje", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+        
+            let responseMessageDiv = document.getElementById("thank-you-message-div");
+            let responseMessageText = document.getElementById("thank-you-message-text");
+
+            console.log(response);
+        
+            if (response.ok) {
+                responseMessageText.textContent = "Thank you! You will be notified as soon as the dataset is published.";
+                form.reset();
+                form.style.display = "none";
+                responseMessageText.style.color = "black";
+            } else {
+                responseMessageText.textContent = "Something went wrong. Please try again and make sure all fields are correctly filled out.";
+                responseMessageText.style.color = "red";
+            }
+        
+            responseMessageDiv.style.display = "block";
+        });
+    </script>
+</section>

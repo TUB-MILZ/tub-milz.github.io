@@ -1,0 +1,65 @@
+---
+layout: default
+title: Objavljivanje
+banner-title: Objavljivanje
+banner-subtitle: Kako i gdje će skup podataka biti objavljen?
+---
+
+<section id="introduction">
+    <p>Skup podataka bit će objavljen na europskim poslužiteljima putem platforme <a href="https://zenodo.org/" target="_blank">Zenodo</a>. Time se osigurava sigurno i dostupno pohranjivanje podataka, uz istodobno poštivanje europskih standarda zaštite podataka. Zenodo je pouzdana platforma koju podržava Europska komisija i koja je posebno razvijena za pohranu i distribuciju znanstvenih podataka.</p>
+
+    <p>Skup podataka bit će objavljen pod <a href="https://opensource.org/licenses/MIT" target="_blank">MIT licencom</a>, jednom od najliberalnijih open-source licenci. Ova licenca dopušta svakome da koristi, kopira, mijenja i dalje dijeli skup podataka, uz obavezno navođenje izvornih autora. Objavljivanjem pod MIT licencom potičemo slobodno korištenje i daljnji razvoj podataka, čime pridonosimo napretku istraživanja i inovacija u području autonomne vožnje na globalnoj razini.</p>
+</section>
+
+<section id="notification-of-publishing">
+    <h2>Obavijest o objavi skupa podataka</h2>
+    <p>Ako želite biti obaviješteni kada skup podataka bude objavljen, možete nam ostaviti svoju adresu e-pošte. Obavijestit ćemo vas čim skup podataka bude dostupan na Zenodu.</p>
+    
+    <form id="veroeffentlichung-form" action="https://formspree.io/f/xjkgrvje" method="POST" class="styled-form">
+        <label for="vorname">Ime:</label>
+        <input type="text" id="vorname" name="vorname">
+        
+        <label for="name">Prezime:</label>
+        <input type="text" id="name" name="name">
+        
+        <label for="email">Vaša e-pošta:</label>
+        <input type="email" id="email" name="email" required>
+
+        <button type="submit" class="btn-primary">Pošalji</button>
+    </form>
+
+    <div id="thank-you-message-div" style="display:none;">
+        <h5 id="thank-you-message-text">Hvala! Bit ćete obaviješteni čim skup podataka bude objavljen.</h5>
+    </div>
+    <script>
+        document.getElementById("veroeffentlichung-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            let form = event.target;
+            let formData = new FormData(form);
+        
+            let response = await fetch("https://formspree.io/f/xjkgrvje", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+        
+            let responseMessageDiv = document.getElementById("thank-you-message-div");
+            let responseMessageText = document.getElementById("thank-you-message-text");
+
+            console.log(response);
+        
+            if (response.ok) {
+                responseMessageText.textContent = "Hvala! Bit ćete obaviješteni čim skup podataka bude objavljen.";
+                form.reset();
+                form.style.display = "none";
+                responseMessageText.style.color = "black";
+            } else {
+                responseMessageText.textContent = "Došlo je do pogreške. Pokušajte ponovno i provjerite jesu li sva polja ispravno ispunjena.";
+                responseMessageText.style.color = "red";
+            }
+        
+            responseMessageDiv.style.display = "block";
+        });
+    </script>
+</section>

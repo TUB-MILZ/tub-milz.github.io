@@ -1,0 +1,80 @@
+---
+layout: default
+title: Data
+banner-title: Data
+banner-subtitle: Contact options for reaching the organizers
+---
+
+<section id="contact-section">
+    <h2>Contact Form</h2>
+    <p>You have the opportunity to view the data generated during your encounter with the recording vehicle and to object to the use of your data within four weeks after the recording. We can also remove data after publication; however, this does not affect any downloads that have already taken place. In addition, we are happy to answer any further questions or comments you may have.</p>
+
+    <h5 id="form-title">Please fill out the following form:</h5>
+
+    <form id="contact-form" action="https://formspree.io/f/mdkazogy" method="POST" class="styled-form">
+        <label for="vorname">First Name:</label>
+        <input type="text" id="vorname" name="vorname" required>
+        
+        <label for="name">Last Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="email">Your Email:</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone">
+        
+        <label for="anlass">Reason for Contact:</label>
+        <div id="anlass">
+            <input type="checkbox" id="einsicht" name="anlass" value="einsicht">
+            <label for="einsicht" class="inline-label">Viewing of Data</label>
+            <input type="checkbox" id="loeschung" name="anlass" value="loeschung">
+            <label for="loeschung" class="inline-label">Deletion of Data</label>
+        </div>
+        
+        <label for="datetime">Time of your encounter with the recording vehicle:</label>
+        <input type="datetime-local" id="datetime" name="datetime">
+
+        <label for="message">Comments, questions, or a short description of yourself or your vehicle:</label>
+        <textarea id="message" name="message"></textarea>
+        
+        <button type="submit" class="btn-primary">Send</button>
+    </form>
+
+    <div id="thank-you-message-div" style="display:none;">
+        <h5 id="thank-you-message-text">Thank you, we will process your request.</h5>
+    </div>
+    <script>
+        document.getElementById("contact-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
+        
+            let form = event.target;
+            let formData = new FormData(form);
+        
+            let response = await fetch("https://formspree.io/f/mdkazogy", {
+                method: "POST",
+                body: formData,
+                headers: { "Accept": "application/json" }
+            });
+        
+            let responseMessageDiv = document.getElementById("thank-you-message-div");
+            let responseMessageText = document.getElementById("thank-you-message-text");
+            let formTitle = document.getElementById("form-title");
+
+            console.log(response);
+        
+            if (response.ok) {
+                responseMessageText.textContent = "Thank you, we will process your request.";
+                form.reset();
+                formTitle.style.display = "none";
+                form.style.display = "none";
+                responseMessageText.style.color = "black";
+            } else {
+                responseMessageText.textContent = "Something went wrong. Please try again and ensure all fields are correctly filled out.";
+                responseMessageText.style.color = "red";
+            }
+        
+            responseMessageDiv.style.display = "block";
+        });
+    </script>
+</section>
