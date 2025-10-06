@@ -1,0 +1,31 @@
+---
+layout: default
+title: Anonymization
+banner-title: Anonymization
+banner-subtitle: How do we anonymize the data?
+---
+
+<section id="introduction">
+    <p>Data protection is of utmost importance to us; therefore, all data in our dataset are anonymized. We take great care to ensure that no personal information or identifiable features are included in the published data. By anonymizing the data, we protect the privacy of the individuals involved while enabling their use for research and development in the field of autonomous driving.</p>
+    <p>For this purpose, we have trained neural networks to identify faces and license plates, which are then obscured. These automated methods significantly reduce the possibility of identification within the data by ensuring that no identifiable features remain in the published datasets. By using state-of-the-art technology, we can effectively ensure data protection while providing high-quality data for research and development in autonomous driving.</p>
+</section>
+
+<section id="faces">
+    <h2>Face Anonymization</h2>
+    <p>
+        To ensure the anonymization of faces, we use neural networks to detect and mask faces in the datasets. These networks are trained to recognize and locate faces within images. By applying these automated methods, we greatly reduce the ability to identify individuals in the published data. This helps protect the privacy of the people involved while allowing researchers and developers to use the data for their projects.
+    </p>
+    <div class="image-grid">
+        <img src="{{ '/assets/images/anonymization/friends.jpg' | relative_url }}" alt="Original Image">
+        <img src="{{ '/assets/images/anonymization/friends_blur.jpg' | relative_url }}" alt="Anonymized Image">
+    </div>
+</section>
+
+<section id="license-plates">
+    <h2>License Plate Anonymization</h2>
+    <p>We have trained a neural network to identify license plates. This network is used to locate license plates in the data, which are then obscured. Through this approach, we significantly reduce the possibility of vehicle identification in the published datasets, thereby ensuring data protection.</p>
+    <div class="image-grid">
+        <img src="{{ '/assets/images/anonymization/traffic.jpg' | relative_url }}" alt="Original Image">
+        <img src="{{ '/assets/images/anonymization/traffic_blur.jpg' | relative_url }}" alt="Anonymized Image">
+    </div>
+</section>
